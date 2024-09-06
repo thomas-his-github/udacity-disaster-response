@@ -3,37 +3,58 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Load data from messages and category files and merge into a single dataframe.
+
+    Args:
+    messages_filepath : Filepath for the messages CSV file.
+    categories_filepath : Filepath for the categories CSV file.
+
+    Returns:
+    df : Merged dataframe containing messages and categories.
+    """
+	# read messages and categories
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
+	
+	# Merge to dataframe and return
     df = pd.merge(messages, categories, on='id')
 
     return df
 
 def clean_data(df, categories_filepath):
+    """
+    Clean the merged dataframe
+
+    Args:
+    df : Merged dataframe containing messages and categories.
+    categories_filepath : Filepath for the categories CSV file.
+
+    Returns:
+    df_clean : Cleaned dataframe 
+    """
     categories = pd.read_csv(categories_filepath)
     categories = categories['categories'].str.split(';', expand=True)
 
-    # select the first row of the categories dataframe
-    row = categories.iloc[0]
+    # Select the first row of the categories dataframe
+    row = categories.iloc
 
-    # use this row to extract a list of new column names for categories.
-    # one way is to apply a lambda function that takes everything
-    # up to the second to last character of each string with slicing
-    category_colnames = row.map(lambda x: x.split('-')[0]).tolist()
+    # Use this row to extract a list of new column names for categories
+    category_colnames = row.map(lambda x: x.split('-')).tolist()
 
     categories.columns = category_colnames
 
     for column in categories:
-        # set each value to be the last character of the string
+        # Set each value to be the last character of the string
         categories[column] = categories[column].str[-1]
 
-        # convert column from string to numeric
+        # Convert column from string to numeric
         categories[column] = pd.to_numeric(categories[column])
 
-    # drop the original categories column from `df`
+    # Drop the original categories column from `df`
     df = df.drop(['categories'], axis=1)
 
-    # concatenate the original dataframe with the new `categories` dataframe
+    # Concatenate the original dataframe with the new `categories` dataframe
     df = pd.concat([df, categories], join='inner', axis=1)
 
     df_clean = df.drop_duplicates()
@@ -41,13 +62,21 @@ def clean_data(df, categories_filepath):
     return df_clean
 
 def save_data(df, database_filename):
+    """
+    Save the cleaned dataframe to a database.
+
+    Args:
+    df : Cleaned dataframe.
+    database_filename : Filepath for the database.
+    """
     engine = create_engine('sqlite:///'+ database_filename)
-    df.to_sql('DisasterResponse_table', engine, index = False, if_exists = 'replace')
-    pass
+    df.to_sql('DisasterResponse_table', engine, index=False, if_exists='replace')
 
 def main():
+    """
+    Main function to load data, clean data, and save data to a database.
+    """
     if len(sys.argv) == 4:
-
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
 
         print('Loading data...\n    MESSAGES: {}\n    CATEGORIES: {}'
@@ -68,8 +97,3 @@ def main():
               'well as the filepath of the database to save the cleaned data ' \
               'to as the third argument. \n\nExample: python process_data.py ' \
               'disaster_messages.csv disaster_categories.csv ' \
-              'DisasterResponse.db')
-
-
-if __name__ == '__main__':
-    main()
