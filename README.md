@@ -5,7 +5,7 @@ Contains the final project for the data engineering course.
 
 In this project a dataset is used with labeled messages that were sent during disaster events. The scripts in this project clean these messages and build a machine learning pipeline to classify new messages. The output will be a web application where these new messages can be classified.
 
-## Instructions:
+## Instructions (as written by Udacity):
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
@@ -21,11 +21,11 @@ In this project a dataset is used with labeled messages that were sent during di
 ## Files used in this project
 
 ### Scripts
-**run.py** - Script that executes the web application (HTML files in templates folder are used by this script).<br/>
-**process_data.py** - Script that loads, cleans and creates the features based on the disaster messages, and stores this in a database.<br/>
-**train_classifier.py** - Script that contains the machine learning pipeline to train based on the messages database and creates a pickle file used for future prediction.<br/>
+**run.py** - Script that executes the web application (HTML files in templates folder are used by this script) (provided by Udacity).<br/>
+**process_data.py** - Script that loads, cleans and creates the features based on the disaster messages, and stores this in a database (template provided by Udacity).<br/>
+**train_classifier.py** - Script that contains the machine learning pipeline to train based on the messages database and creates a pickle file used for future prediction(template provided by Udacity).<br/>
 
 ### Data
 
-**disaster_messages.csv** - Messages sent during disaster events<br/>
-**disaster_categories.csv** - Categories of the disaster messages<br/>
+**disaster_messages.csv** - Messages sent during disaster events (provided by Udacity)<br/>
+**disaster_categories.csv** - Categories of the disaster messages (provided by Udacity)<br/>
