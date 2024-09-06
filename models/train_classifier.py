@@ -24,8 +24,9 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 
 def load_data(database_filepath):
-    engine = create_engine('sqlite:///ETL_DB.db')
-    df = pd.read_sql_table(database_filepath, engine).reset_index()
+    engine = create_engine('sqlite:///' + database_filepath)
+    df = pd.read_sql_table('DisasterResponse_table', engine).reset_index()
+    
     X = df.message.values
     y = df.loc[:, 'related':'direct_report'].values
 
@@ -63,8 +64,9 @@ def build_model():
 def evaluate_model(model, X_test, Y_test, database_filepath):
     y_pred = model.predict(X_test)
 
-    engine_for_columns = create_engine('sqlite:///ETL_DB.db')
-    df_for_columns = pd.read_sql_table(database_filepath, engine_for_columns).reset_index()
+    engine_for_columns = create_engine('sqlite:///' + database_filepath)
+    df = pd.read_sql_table('DisasterResponse_table', engine_for_columns).reset_index()
+    
     columns = df_for_columns.iloc[:, 4:].columns
 
     for i, category in enumerate(columns):
