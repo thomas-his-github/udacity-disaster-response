@@ -65,7 +65,7 @@ def evaluate_model(model, X_test, Y_test, database_filepath):
     y_pred = model.predict(X_test)
 
     engine_for_columns = create_engine('sqlite:///' + database_filepath)
-    df = pd.read_sql_table('DisasterResponse_table', engine_for_columns).reset_index()
+    df_for_columns = pd.read_sql_table('DisasterResponse_table', engine_for_columns).reset_index()
     
     columns = df_for_columns.iloc[:, 4:].columns
 
