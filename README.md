@@ -1,7 +1,11 @@
 # udacity-disaster-response
-Contains the final project for the data engineering course
 
-### Instructions:
+## Summary
+Contains the final project for the data engineering course.
+
+In this project a dataset is used with labeled messages that were sent during disaster events. The scripts in this project clean these messages and build a machine learning pipeline to classify new messages. The output will be a web application where these new messages can be classified.
+
+## Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
@@ -13,3 +17,15 @@ Contains the final project for the data engineering course
     `python run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+## Files used in this project
+
+### Scripts
+run.py - Script that executes the web application (HTML files in templates folder are used by this script)
+process_data.py - Script that loads, cleans and creates the features based on the disaster messages, and stores this in a database.
+train_classifier.py - Script that contains the machine learning pipeline to train based on the messages database and creates a pickle file used for future prediction.
+
+### Data
+
+disaster_messages.csv - Messages sent during disaster events
+disaster_categories.csv - Categories of the disaster messages
