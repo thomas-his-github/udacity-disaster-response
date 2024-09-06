@@ -21,11 +21,11 @@ In this project a dataset is used with labeled messages that were sent during di
 ## Files used in this project
 
 ### Scripts
-run.py - Script that executes the web application (HTML files in templates folder are used by this script)
-process_data.py - Script that loads, cleans and creates the features based on the disaster messages, and stores this in a database.
-train_classifier.py - Script that contains the machine learning pipeline to train based on the messages database and creates a pickle file used for future prediction.
+**run.py** - Script that executes the web application (HTML files in templates folder are used by this script).<br/>
+**process_data.py** - Script that loads, cleans and creates the features based on the disaster messages, and stores this in a database.<br/>
+**train_classifier.py** - Script that contains the machine learning pipeline to train based on the messages database and creates a pickle file used for future prediction.<br/>
 
 ### Data
 
-disaster_messages.csv - Messages sent during disaster events
-disaster_categories.csv - Categories of the disaster messages
+**disaster_messages.csv** - Messages sent during disaster events<br/>
+**disaster_categories.csv** - Categories of the disaster messages<br/>
