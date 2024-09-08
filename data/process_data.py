@@ -48,6 +48,10 @@ def clean_data(df, categories_filepath):
         # Set each value to be the last character of the string
         categories[column] = categories[column].str[-1]
 
+	# Replace wrong values of '2' by '1'
+	categories[column] = categories[column].replace('2', '1')
+
+
         # Convert column from string to numeric
         categories[column] = pd.to_numeric(categories[column])
 
