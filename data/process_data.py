@@ -37,10 +37,10 @@ def clean_data(df, categories_filepath):
     categories = categories['categories'].str.split(';', expand=True)
 
     # Select the first row of the categories dataframe
-    row = categories.iloc
+    row = categories.iloc[0]
 
     # Use this row to extract a list of new column names for categories
-    category_colnames = row.map(lambda x: x.split('-')).tolist()
+    category_colnames = row.map(lambda x: x.split('-')[0]).tolist()
 
     categories.columns = category_colnames
 
